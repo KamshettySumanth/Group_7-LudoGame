@@ -1,0 +1,142 @@
+<html>
+
+<head>
+    <script language="JavaScript">var baseUrl = "<%= baseUrl %>"</script>
+    <script src="<%= baseUrl %>libs/jquery.min.js"></script>
+    <script src="<%= baseUrl %>libs/socket.io.js"></script>
+    <script type="text/javascript" src="<%= baseUrl %>playerlobby.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+        integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+        crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="<%= baseUrl %>game.css" />
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            background-image: url("https://ludo-game-assets.s3.amazonaws.com/dice-7734660_960_720.webp");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .card-default {
+            background-color: rgba(240, 248, 255, 0.516);
+            border-radius: 25px;
+        }
+
+        .navbar-light {
+            background-color: rgba(240, 248, 255, 0.449);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/admin">
+            <b>Admin Dashboard</b></a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <b>
+                        <a class="nav-link btn btn-danger" href="/adminlogin">Logout</a>
+                    </b>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-default" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <b>Previous Games</b>
+                    </div>
+                    <div id="previousGames" class="card-body">
+                        <!-- Display previous games details here -->
+                        <!-- This section remains unchanged -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="previousGamesModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Previous Games</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="card card-default">
+                            <div id="previousGames" class="card-body">
+                                <!-- Display previous games details here -->
+                                <!-- This section remains unchanged -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Table for Winners -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-default" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <b>Winners</b>
+                    </div>
+                    <div id="winnersTable" class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Game ID</th>
+                                    <th scope="col">Winner</th>
+                                    <th scope="col">Turn</th>
+                                    <th scope="col">Last Move Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% winners.forEach(function(winner) { %>
+                                    <tr>
+                                        <td><%= winner.id %></td>
+                                        <td><%= winner.gameId %></td>
+                                        <td><%= winner.winners %></td>
+                                        <td><%= winner.turn %></td>
+                                        <td><%= winner.lastmovetime %></td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of New Table for Winners -->
+
+</body>
+
+</html>
